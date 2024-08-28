@@ -1,0 +1,15 @@
+     1                                  [org 0x0100]
+     2 00000000 B80000                  mov ax,0
+     3 00000003 BB0000                  mov bx,0
+     4                                  outerloop:
+     5 00000006 0387[1E00]                  add ax,[num1+bx]
+     6 0000000A 81C30500                    add bx,5
+     7 0000000E 81FB1500                    cmp bx,21
+     8 00000012 75F2                        jne outerloop
+     9                                  
+    10 00000014 A3[1C00]                mov [result],ax
+    11 00000017 B8004C                  mov ax,0x4c00
+    12 0000001A CD21                    int 0x21
+    13                                  
+    14 0000001C 0000                    result:dw  0
+    15 0000001E 05000A000F001400        num1:dw  5,10,15,20
