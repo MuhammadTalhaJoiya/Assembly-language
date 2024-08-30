@@ -1,0 +1,17 @@
+     1                                  [org 0x0100]
+     2 00000000 E90A00                  jmp start
+     3 00000003 05000A000F001400        num1:dw  5,10,15,20
+     4 0000000B 0000                    result:dw  0
+     5                                  start:
+     6 0000000D B80000                  mov ax,0
+     7 00000010 BB0000                  mov bx,0
+     8                                  outerloop:
+     9 00000013 0387[0300]                  add ax,[num1+bx]
+    10 00000017 81C30500                    add bx,5
+    11 0000001B 81FB1400                    cmp bx,20
+    12 0000001F 75F2                        jne outerloop
+    13                                  
+    14 00000021 A3[0B00]                mov [result],ax
+    15 00000024 B8004C                  mov ax,0x4c00
+    16 00000027 CD21                    int 0x21
+    17                                  
