@@ -1,0 +1,23 @@
+     1                                  
+     2                                  [org 0x0100]
+     3 00000000 E90800                  jmp start
+     4 00000003 0600040005000200        num1:dw  6,4,5,2
+     5                                  start:
+     6 0000000B B90400                      mov cx,4
+     7                                      outerloop:
+     8 0000000E BB0000                          mov bx,0
+     9                                          innerloop:
+    10 00000011 8B87[0300]                          mov ax,[num1+bx]
+    11 00000015 3B87[0500]                          cmp ax,[num1+bx+2]
+    12 00000019 760C                                jbe noswap
+    13 0000001B 8B97[0500]                              mov dx,[num1+bx+2]
+    14 0000001F 8987[0500]                              mov [num1+bx+2],ax
+    15 00000023 8997[0300]                              mov [num1+bx],dx
+    16                                              noswap:
+    17 00000027 81C30200                                add bx,2
+    18 0000002B 81FB0600                                cmp bx,6
+    19 0000002F 75E0                                    jne innerloop
+    20 00000031 81E90100                        sub cx,1
+    21 00000035 75D7                            jnz outerloop
+    22 00000037 B8004C                      mov ax,0x4c00
+    23 0000003A CD21                        int 0x21
